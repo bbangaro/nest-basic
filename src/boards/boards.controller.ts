@@ -80,4 +80,4 @@ export class BoardsController {
     }
 }
 
-// 3시간 38분부터
+// 3시간 38분부터!
