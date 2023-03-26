@@ -5,6 +5,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 // import { Strategy } from 'passport-local';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
+import * as config from 'config';
+
+const dbConfig = config.get('db');
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     private userRepository: UserRepository,
   ) {
     super({
-      secretOrKey: 'Secret1234',
+      secretOrKey: process.env.RDS_SECRET || dbConfig.secret,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }

@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -23,6 +24,7 @@ import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe'
 @Controller('boards')
 @UseGuards(AuthGuard())
 export class BoardsController {
+  private logger = new Logger('Boards Controller');
   // boardsService 파라미터에 BoardsService 객체를 타입으로 지정
   // 접근 제한자가 사용된 생성자 파라미터는 암묵적으로 클래스 프로퍼티로 선언 (파라미터 -> 프로퍼티)
   constructor(private boardsService: BoardsService) {}
@@ -33,6 +35,7 @@ export class BoardsController {
   // }
   @Get('/')
   getAllBoard(@GetUser() user: User): Promise<Board[]> {
+    this.logger.verbose(`User ${user.username} trying to get all board`);
     return this.boardsService.getAllBoards(user);
   }
 
@@ -99,3 +102,7 @@ export class BoardsController {
 }
 
 // 5시간 43분부터!
+
+/*
+잘생긴 제로초님 안녕하세요. 3.비전공/프론트개발자용 네트워크 강좌 주세요!!!! 떨어지면  타입스크립트 책 존버합니당.. 또 떨어지면 nest강좌 주세요... ^_^. 입사 이후로 제로초님 강좌만 보고 있습니당〰〰〰~ (인프런 채고채고)
+*/
