@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Post,
-  Req,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -21,7 +20,6 @@ export class AuthController {
     // @Body(ValidationPipe) authCredentialDto: AuthCredentialDto,
     @Body(ValidationPipe) authCredentialDto: AuthCredentialDto,
   ): Promise<void> {
-    console.log('authCredentialDto', authCredentialDto);
     return this.authService.signUp(authCredentialDto);
   }
 

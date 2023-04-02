@@ -24,7 +24,6 @@ export class AuthService {
   ): Promise<{ accessToken: string }> {
     const { username, password } = authCredentialDto;
     const user = await this.userRepository.findOne({ username });
-    console.log('username', username);
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // 유저 토큰 생성 ( Secret + payload )
